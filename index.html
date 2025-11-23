@@ -39,6 +39,12 @@
         .add-to-cart { background: #28a745; color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; transition: all 0.3s ease; }
         .add-to-cart:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
         
+        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem; }
+        .gallery-item { position: relative; border-radius: 10px; overflow: hidden; transition: transform 0.3s ease; }
+        .gallery-item:hover { transform: scale(1.05); }
+        .gallery-item img { width: 100%; height: 200px; object-fit: cover; }
+        .gallery-item span { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(139,69,19,0.8); color: white; padding: 10px; text-align: center; }
+        
         .features { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
         .feature { background: #FFF8DC; padding: 1rem 2rem; border-radius: 20px; border: 2px solid #D2691E; transition: all 0.3s ease; }
         .feature:hover { transform: scale(1.1); background: #D2691E; color: white; }
@@ -79,6 +85,7 @@
         <div class="nav-container">
             <h1>🍠 Synergy Food</h1>
             <ul>
+                <li><a href="#gallery">Gallery</a></li>
                 <li><a href="#products">Products</a></li>
                 <li><a href="#about">About</a></li>
                 <li><a href="#contact">Contact</a></li>
@@ -89,9 +96,29 @@
 
     <section id="hero">
         <div class="hero-content">
-            <h2>Bende Garri, Eggs, Potato Flour & More</h2>
-            <p>Complete food supplies: Garri, Eggs, Palm Oil, Beans, PAP & All Food Items to your doorstep</p>
+            <h2>Synergy Food - Complete Food Supplies</h2>
+            <p>Bende Garri, Eggs, Potato Flour, Red Oil, Beans, Dried Cow Pomo, PAP & All Food Items to your doorstep</p>
             <a href="#products" class="cta-button">Shop Now</a>
+        </div>
+    </section>
+
+    <section id="gallery">
+        <div class="container">
+            <h2>Product Gallery</h2>
+            <div class="gallery-grid">
+                <div class="gallery-item"><img src="bende-garri-white.jpg" alt="Bende Garri White" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkdhcnJpIFdoaXRlPC90ZXh0Pjwvc3ZnPg=='"><span>Bende Garri White</span></div>
+                <div class="gallery-item"><img src="bende-garri-red.jpg" alt="Bende Garri Red" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkdhcnJpIFJlZDwvdGV4dD48L3N2Zz4='"><span>Bende Garri Red</span></div>
+                <div class="gallery-item"><img src="eggs-crates.jpg" alt="Eggs in Crates" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkVnZ3MgQ3JhdGVzPC90ZXh0Pjwvc3ZnPg=='"><span>Eggs in Crates</span></div>
+                <div class="gallery-item"><img src="potato-flour-small.jpg" alt="Potato Flour Small" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlBvdGF0byBGbG91cjwvdGV4dD48L3N2Zz4='"><span>Potato Flour Small</span></div>
+                <div class="gallery-item"><img src="potato-flour-large.jpg" alt="Potato Flour Large" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlBvdGF0byBGbG91ciBMYXJnZTwvdGV4dD48L3N2Zz4='"><span>Potato Flour Large</span></div>
+                <div class="gallery-item"><img src="red-oil-5l.jpg" alt="Red Oil 5L" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlJlZCBPaWwgNUw8L3RleHQ+PC9zdmc+'"><span>Red Oil 5L</span></div>
+                <div class="gallery-item"><img src="red-oil-10l.jpg" alt="Red Oil 10L" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlJlZCBPaWwgMTBMPC90ZXh0Pjwvc3ZnPg=='"><span>Red Oil 10L</span></div>
+                <div class="gallery-item"><img src="red-oil-25l.jpg" alt="Red Oil 25L" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlJlZCBPaWwgMjVMPC90ZXh0Pjwvc3ZnPg=='"><span>Red Oil 25L</span></div>
+                <div class="gallery-item"><img src="beans.jpg" alt="Beans" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkJlYW5zPC90ZXh0Pjwvc3ZnPg=='"><span>Beans</span></div>
+                <div class="gallery-item"><img src="dried-cow-pomo.jpg" alt="Dried Cow Pomo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkRyaWVkIENvdyBQb21vPC90ZXh0Pjwvc3ZnPg=='"><span>Dried Cow Pomo</span></div>
+                <div class="gallery-item"><img src="ready-pap.jpg" alt="Ready PAP" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlJlYWR5IFBBUDwvdGV4dD48L3N2Zz4='"><span>Ready PAP</span></div>
+                <div class="gallery-item"><img src="all-food-items.jpg" alt="All Food Items" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkFsbCBGb29kIEl0ZW1zPC90ZXh0Pjwvc3ZnPg=='"><span>All Food Items</span></div>
+            </div>
         </div>
     </section>
 
@@ -151,9 +178,19 @@
     <section id="about">
         <div class="container">
             <h2>About Synergy Food</h2>
-            <p>We are into Bende Garri white and red supplies in small and large quantity. Eggs supplies in crates wholesale. Potato flour in small and large quantity. Direct Red oil in 4 lits 10 lits 25 lits and more. Beans small and large quantity. Ready to make PAP on request. We deal with any food items to your door step.</p>
+            <p><strong>WE ARE INTO:</strong></p>
+            <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
+                <li>Bende Garri white and red supplies in small and large quantity</li>
+                <li>Eggs supplies in crates – wholesale</li>
+                <li>Potato Flour in small and large quantity</li>
+                <li>Direct Red Oil in 5Ltrs, 10Ltrs, 25Ltrs and more</li>
+                <li>Beans – Small and Large quantity</li>
+                <li>Dried Cow Pomo</li>
+                <li>Ready to make PAP on request</li>
+                <li>We deal with all food items to your doorstep</li>
+            </ul>
             <p><strong>Order through:</strong> 08027098029 / 08110839405</p>
-            <p><strong>Synergy food is near to you. You are free to reach out to us anytime any day.</strong></p>
+            <p><strong>Synergy Food is near to you. You are free to reach out to us anytime any day. Thanks.</strong></p>
             <div class="features">
                 <div class="feature">✅ Fresh Daily</div>
                 <div class="feature">🚚 Free Delivery</div>

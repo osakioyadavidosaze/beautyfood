@@ -14,6 +14,11 @@
         .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
         nav ul { display: flex; list-style: none; gap: 2rem; }
         nav a { color: white; text-decoration: none; }
+        .hamburger { display: none; flex-direction: column; cursor: pointer; }
+        .hamburger span { width: 25px; height: 3px; background: white; margin: 3px 0; transition: 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
         
         #hero { background: linear-gradient(135deg, #D2691E, #CD853F); color: white; height: 100vh; display: flex; align-items: center; justify-content: center; text-align: center; }
         .hero-content h2 { font-size: 3rem; margin-bottom: 1rem; }
@@ -77,6 +82,10 @@
             .features { flex-direction: column; align-items: center; }
             .modal-content { margin: 5% auto; width: 95%; }
             .product-card:hover { transform: translateY(-5px); }
+            .hamburger { display: flex; }
+            nav ul { position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px); background: #8B4513; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 2rem; transition: left 0.3s ease; }
+            nav ul.active { left: 0; }
+            nav ul li { margin: 1rem 0; }
         }
     </style>
 </head>
@@ -84,19 +93,24 @@
     <nav>
         <div class="nav-container">
             <h1>🍠 Synergy Food</h1>
-            <ul>
-                <li><a href="#gallery">Gallery</a></li>
-                <li><a href="#products">Products</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="#contact">Contact</a></li>
-                <li><a href="#" onclick="toggleCart()">🛒 Cart (<span id="cart-count">0</span>)</a></li>
+            <div class="hamburger" onclick="toggleMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+            <ul id="nav-menu">
+                <li><a href="#gallery" onclick="closeMenu()">Gallery</a></li>
+                <li><a href="#products" onclick="closeMenu()">Products</a></li>
+                <li><a href="#about" onclick="closeMenu()">About</a></li>
+                <li><a href="#contact" onclick="closeMenu()">Contact</a></li>
+                <li><a href="#" onclick="toggleCart(); closeMenu();">🛒 Cart (<span id="cart-count">0</span>)</a></li>
             </ul>
         </div>
     </nav>
 
     <section id="hero">
         <div class="hero-content">
-            <h2>Synergy Food - Complete Food Supplies</h2>
+            <h2 style="color: white; font-size: 48px">Synergy Food - Complete Food Supplies</h2>
             <p>Bende Garri, Eggs, Potato Flour, Red Oil, Beans, Dried Cow Pomo, PAP & All Food Items to your doorstep</p>
             <a href="#products" class="cta-button">Shop Now</a>
         </div>
@@ -143,7 +157,7 @@
                 </div>
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="food.jpg" alt="Potato Flour Small" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                        <img src="small.jpg" alt="Potato Flour Small" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
                         <span style="display:none; font-size:4rem;">🥔</span>
                     </div>
                     <h3>White Garri</h3>
@@ -173,7 +187,7 @@
                 </div>
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="oil.jpg" alt="Eggs Wholesale" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                        <img src="me.jpg" alt="Eggs Wholesale" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
                         <span style="display:none; font-size:4rem;">🥚</span>
                     </div>
                     <h3>Red Oil</h3>
@@ -188,7 +202,7 @@
                 </div>
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="beans.jpg" alt="Direct Red Oil" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                        <img src="oil.jpg" alt="Direct Red Oil" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
                         <span style="display:none; font-size:4rem;">🛢️</span>
                     </div>
                     <h3>Big White Beans</h3>
@@ -203,7 +217,7 @@
                 </div>
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="dried.jpg" alt="Beans" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                        <img src="beans.jpg" alt="Beans" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
                         <span style="display:none; font-size:4rem;">🫘</span>
                     </div>
                     <h3>Dried Cow Pomo</h3>
@@ -218,7 +232,7 @@
                 </div>
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="meal.jpg" alt="Dried Cow Pomo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                        <img src="dried.jpg" alt="Dried Cow Pomo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
                         <span style="display:none; font-size:4rem;">🥩</span>
                     </div>
                     <h3>PAP</h3>
@@ -233,7 +247,7 @@
                 </div>
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="me.jpg" alt="Ready PAP" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
+                        <img src="meal.jpg" alt="Ready PAP" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
                         <span style="display:none; font-size:4rem;">🥣</span>
                     </div>
                     <h3>Eggs (Wholesale Crates)</h3>
@@ -601,6 +615,21 @@
             submitBtn.textContent = 'Place Order';
             submitBtn.disabled = false;
         });
+
+        // Hamburger menu functions
+        function toggleMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            hamburger.classList.toggle('active');
+            navMenu.classList.toggle('active');
+        }
+
+        function closeMenu() {
+            const hamburger = document.querySelector('.hamburger');
+            const navMenu = document.getElementById('nav-menu');
+            hamburger.classList.remove('active');
+            navMenu.classList.remove('active');
+        }
 
         // Initialize
         calculatePrice();

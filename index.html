@@ -3,108 +3,728 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Synergy Food - Fresh Potato Flour & Garri</title>
+    <title>Synergy Foods - Complete Food Supplies</title>
     <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@3/dist/email.min.js"></script>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700;900&family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body { font-family: Arial, sans-serif; line-height: 1.6; color: #333; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        nav { background: #8B4513; color: white; padding: 1rem 0; position: fixed; width: 100%; top: 0; z-index: 1000; }
-        .nav-container { max-width: 1200px; margin: 0 auto; padding: 0 20px; display: flex; justify-content: space-between; align-items: center; }
-        nav ul { display: flex; list-style: none; gap: 2rem; }
-        nav a { color: white; text-decoration: none; }
-        .hamburger { display: none; flex-direction: column; cursor: pointer; }
-        .hamburger span { width: 25px; height: 3px; background: white; margin: 3px 0; transition: 0.3s; }
-        .hamburger.active span:nth-child(1) { transform: rotate(-45deg) translate(-5px, 6px); }
-        .hamburger.active span:nth-child(2) { opacity: 0; }
-        .hamburger.active span:nth-child(3) { transform: rotate(45deg) translate(-5px, -6px); }
-        
-         #hero { 
-    background: linear-gradient(135deg, #D2691E, #CD853F); 
-    color: white; 
-    min-height: 50vh;
-    height: auto;
-    padding: 4rem 1rem;
-    display: flex; 
-    align-items: center; 
-    justify-content: center; 
-    text-align: center;
-    width: 100%;
-}
+        :root {
+            --primary: #C45A2C;
+            --primary-dark: #8B3A1E;
+            --primary-light: #E8865A;
+            --secondary: #2D5A3D;
+            --accent: #D4A574;
+            --cream: #FDF6EE;
+            --warm-white: #FFF8F0;
+            --brown: #5C3D2E;
+            --light-brown: #A67C5B;
+            --gold: #C9A84C;
+            --shadow: rgba(92, 61, 46, 0.12);
+            --shadow-dark: rgba(92, 61, 46, 0.25);
+        }
 
-        .hero-content h2 { font-size: 3rem; margin-bottom: 1rem; }
-        .cta-button { background: white; color: #8B4513; padding: 12px 30px; text-decoration: none; border-radius: 5px; font-weight: bold; margin-top: 2rem; display: inline-block; transition: all 0.3s ease; }
-        .cta-button:hover { transform: scale(1.1); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         
-        section { padding: 80px 0; }
-        h2 { font-size: 2.5rem; margin-bottom: 2rem; text-align: center; color: #8B4513; }
+        html { scroll-behavior: smooth; }
         
-        .product-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 2rem; margin-top: 2rem; }
-        .product-card { background: #FFF8DC; padding: 2rem; border-radius: 10px; text-align: center; border: 2px solid #D2691E; transition: all 0.3s ease; cursor: pointer; }
-        .product-card:hover { transform: translateY(-10px); box-shadow: 0 10px 25px rgba(0,0,0,0.2); }
-        .product-image { width: 100%; height: 200px; background: #f0f0f0; border-radius: 8px; margin-bottom: 15px; display: flex; align-items: center; justify-content: center; font-size: 4rem; transition: transform 0.3s ease; overflow: hidden; }
-        .product-image img { width: 100%; height: 100%; object-fit: cover; border-radius: 8px; }
-        .product-card:hover .product-image { transform: scale(1.1) rotate(5deg); }
-        .price { font-size: 2rem; color: #8B4513; font-weight: bold; margin: 1rem 0; }
-        .stock { color: #28a745; font-weight: bold; margin: 5px 0; animation: pulse 2s infinite; }
-        .bulk-discount { background: #fff3cd; color: #856404; padding: 5px; border-radius: 3px; font-size: 0.9rem; margin: 10px 0; }
-        .rating { color: #ffc107; font-size: 0.9rem; margin: 5px 0; }
-        .qty-input { width: 80px; margin: 10px 5px; text-align: center; padding: 8px; border: 1px solid #D2691E; border-radius: 5px; transition: all 0.3s ease; }
-        .qty-input:focus { border-color: #8B4513; box-shadow: 0 0 10px rgba(139, 69, 19, 0.3); transform: scale(1.05); }
-        .item-total { font-weight: bold; color: #8B4513; margin: 10px 0; font-size: 1.1rem; }
-        .add-to-cart { background: #28a745; color: white; padding: 12px 24px; border: none; border-radius: 5px; cursor: pointer; transition: all 0.3s ease; }
-        .add-to-cart:hover { transform: scale(1.05); box-shadow: 0 5px 15px rgba(0,0,0,0.3); }
+        body { 
+            font-family: 'Inter', sans-serif; 
+            line-height: 1.7; 
+            color: var(--brown); 
+            background: var(--cream); 
+        }
+
+        h1, h2, h3, h4 {
+            font-family: 'Playfair Display', serif;
+            font-weight: 700;
+        }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px; }
         
-        .gallery-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 1rem; margin-top: 2rem; }
-        .gallery-item { position: relative; border-radius: 10px; overflow: hidden; transition: transform 0.3s ease; }
-        .gallery-item:hover { transform: scale(1.05); }
-        .gallery-item img { width: 100%; height: 200px; object-fit: cover; }
-        .gallery-item span { position: absolute; bottom: 0; left: 0; right: 0; background: rgba(139,69,19,0.8); color: white; padding: 10px; text-align: center; }
+        /* Navigation */
+        nav { 
+            background: rgba(255, 248, 240, 0.97); 
+            backdrop-filter: blur(20px);
+            padding: 0.8rem 0; 
+            position: fixed; 
+            width: 100%; 
+            top: 0; 
+            z-index: 1000; 
+            box-shadow: 0 2px 20px var(--shadow);
+        }
         
-        .features { display: flex; justify-content: center; gap: 2rem; margin-top: 2rem; flex-wrap: wrap; }
-        .feature { background: #FFF8DC; padding: 1rem 2rem; border-radius: 20px; border: 2px solid #D2691E; transition: all 0.3s ease; }
-        .feature:hover { transform: scale(1.1); background: #D2691E; color: white; }
+        .nav-container { 
+            max-width: 1200px; 
+            margin: 0 auto; 
+            padding: 0 24px; 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+        }
         
-        #whatsapp-btn { position: fixed; bottom: 20px; right: 20px; background: #25d366; color: white; padding: 15px; border-radius: 50px; cursor: pointer; z-index: 1000; box-shadow: 0 4px 8px rgba(0,0,0,0.3); animation: bounce 2s infinite; }
+        nav .logo {
+            font-family: 'Playfair Display', serif;
+            font-size: 1.6rem;
+            font-weight: 900;
+            color: var(--primary);
+            text-decoration: none;
+        }
         
-        .modal { display: none; position: fixed; z-index: 1001; left: 0; top: 0; width: 100%; height: 100%; background: rgba(0,0,0,0.5); animation: fadeIn 0.3s ease; }
-        .modal-content { background: white; margin: 10% auto; padding: 20px; border-radius: 10px; width: 90%; max-width: 500px; animation: slideDown 0.3s ease; }
-        .close { float: right; font-size: 28px; cursor: pointer; }
-        #cart-items { max-height: 300px; overflow-y: auto; margin: 20px 0; }
-        .cart-item { display: flex; justify-content: space-between; padding: 10px; border-bottom: 1px solid #eee; animation: slideIn 0.3s ease; }
-        #cart-total { font-size: 1.5rem; font-weight: bold; text-align: center; margin: 20px 0; }
-        #checkout-btn { width: 100%; background: #8B4513; color: white; padding: 15px; border: none; border-radius: 5px; cursor: pointer; font-size: 1.1rem; }
+        nav ul { display: flex; list-style: none; gap: 2rem; }
         
-        #contact { background: #FFF8DC; }
-        #price-calculator { background: #f8f9fa; padding: 20px; border-radius: 10px; margin-bottom: 20px; }
-        #calc-result { font-size: 1.5rem; font-weight: bold; color: #8B4513; margin-top: 10px; }
-        form { max-width: 600px; margin: 0 auto; display: flex; flex-direction: column; gap: 1rem; }
-        input, select, button { padding: 12px; border: 1px solid #D2691E; border-radius: 5px; font-size: 1rem; }
-        button[type="submit"] { background: #8B4513; color: white; border: none; cursor: pointer; }
+        nav a { 
+            color: var(--brown); 
+            text-decoration: none; 
+            transition: all 0.3s ease; 
+            font-weight: 500;
+            font-size: 0.92rem;
+            position: relative;
+            padding: 5px 0;
+        }
         
-        @keyframes pulse { 0% { opacity: 1; } 50% { opacity: 0.7; } 100% { opacity: 1; } }
-        @keyframes bounce { 0%, 20%, 50%, 80%, 100% { transform: translateY(0); } 40% { transform: translateY(-10px); } 60% { transform: translateY(-5px); } }
-        @keyframes slideIn { from { transform: translateX(-100%); opacity: 0; } to { transform: translateX(0); opacity: 1; } }
+        nav a::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 0;
+            height: 2px;
+            background: var(--primary);
+            transition: width 0.3s ease;
+        }
+        
+        nav a:hover { color: var(--primary); }
+        nav a:hover::after { width: 100%; }
+        
+        .hamburger { display: none; flex-direction: column; cursor: pointer; gap: 5px; }
+        .hamburger span { width: 25px; height: 2px; background: var(--brown); transition: 0.3s; }
+        .hamburger.active span:nth-child(1) { transform: rotate(45deg) translate(5px, 5px); }
+        .hamburger.active span:nth-child(2) { opacity: 0; }
+        .hamburger.active span:nth-child(3) { transform: rotate(-45deg) translate(7px, -6px); }
+        
+        /* Hero Section */
+        #hero { 
+            background: linear-gradient(135deg, var(--primary) 0%, var(--primary-dark) 50%, var(--secondary) 100%);
+            min-height: 100vh; 
+            display: flex; 
+            align-items: center; 
+            justify-content: center; 
+            text-align: center; 
+            position: relative;
+            overflow: hidden;
+            padding-top: 80px;
+        }
+        
+        #hero::before {
+            content: '';
+            position: absolute;
+            inset: 0;
+            background-image: 
+                radial-gradient(circle at 20% 80%, rgba(212, 165, 116, 0.2) 0%, transparent 50%),
+                radial-gradient(circle at 80% 20%, rgba(201, 168, 76, 0.15) 0%, transparent 50%);
+            pointer-events: none;
+        }
+        
+        .hero-shapes { position: absolute; inset: 0; pointer-events: none; overflow: hidden; }
+        .hero-shapes span {
+            position: absolute;
+            border-radius: 50%;
+            opacity: 0.08;
+            animation: float 20s ease-in-out infinite;
+        }
+        .hero-shapes span:nth-child(1) { width: 300px; height: 300px; top: -50px; left: -100px; background: var(--accent); }
+        .hero-shapes span:nth-child(2) { width: 200px; height: 200px; bottom: 10%; right: -50px; background: var(--gold); animation-delay: -5s; }
+        .hero-shapes span:nth-child(3) { width: 150px; height: 150px; top: 30%; right: 20%; background: var(--accent); animation-delay: -10s; }
+        .hero-shapes span:nth-child(4) { width: 250px; height: 250px; bottom: -80px; left: 30%; background: var(--gold); animation-delay: -15s; }
+        
+        @keyframes float {
+            0%, 100% { transform: translate(0, 0); }
+            50% { transform: translate(20px, -20px); }
+        }
+        
+        .hero-content { position: relative; z-index: 2; max-width: 800px; padding: 3rem 2rem; }
+        
+        .hero-badge {
+            display: inline-block;
+            background: rgba(255, 255, 255, 0.15);
+            backdrop-filter: blur(10px);
+            padding: 8px 24px;
+            border-radius: 50px;
+            color: var(--warm-white);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 1.5rem;
+            border: 1px solid rgba(255, 255, 255, 0.2);
+        }
+        
+        .hero-main-title { 
+            font-size: clamp(2.8rem, 7vw, 5rem); 
+            font-weight: 900; 
+            color: var(--warm-white);
+            line-height: 1.1;
+            margin-bottom: 1rem;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero-tagline { 
+            font-size: clamp(1rem, 2vw, 1.3rem); 
+            color: rgba(255, 248, 240, 0.9);
+            margin-bottom: 1rem;
+        }
+        
+        .hero-description { 
+            font-size: 1rem; 
+            color: rgba(255, 248, 240, 0.75);
+            max-width: 550px;
+            margin: 0 auto 2.5rem;
+            line-height: 1.8;
+        }
+        
+        .hero-actions { display: flex; flex-wrap: wrap; justify-content: center; gap: 1rem; }
+        
+        .hero-button { 
+            display: inline-flex; 
+            align-items: center; 
+            justify-content: center; 
+            padding: 1rem 2.2rem; 
+            border-radius: 50px; 
+            font-weight: 600; 
+            text-decoration: none; 
+            transition: all 0.3s ease;
+            font-size: 0.95rem;
+        }
+        
+        .hero-button.primary {
+            background: var(--warm-white);
+            color: var(--primary);
+            box-shadow: 0 8px 30px rgba(0, 0, 0, 0.2);
+        }
+        
+        .hero-button.primary:hover {
+            transform: translateY(-3px);
+            box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
+        }
+        
+        .hero-button.secondary {
+            background: transparent;
+            color: var(--warm-white);
+            border: 2px solid rgba(255, 255, 255, 0.4);
+        }
+        
+        .hero-button.secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: var(--warm-white);
+        }
+        
+        /* Sections */
+        section { padding: 90px 0; }
+        section:not(#hero) { background: var(--warm-white); }
+        section:nth-child(even):not(#hero) { background: var(--cream); }
+        
+        .section-header { text-align: center; margin-bottom: 3.5rem; }
+        
+        .section-label {
+            display: inline-block;
+            color: var(--primary);
+            font-size: 0.8rem;
+            font-weight: 600;
+            letter-spacing: 3px;
+            text-transform: uppercase;
+            margin-bottom: 0.5rem;
+        }
+        
+        h2 { 
+            font-size: clamp(1.8rem, 4vw, 2.8rem); 
+            color: var(--brown);
+            margin-bottom: 0.5rem;
+        }
+        
+        .section-subtitle {
+            color: var(--light-brown);
+            font-size: 1.05rem;
+            max-width: 500px;
+            margin: 0 auto;
+        }
+        
+        /* Gallery */
+        .gallery-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fill, minmax(220px, 1fr)); 
+            gap: 1.2rem; 
+        }
+        
+        .gallery-item { 
+            position: relative; 
+            overflow: hidden; 
+            border-radius: 16px; 
+            box-shadow: 0 4px 15px var(--shadow);
+            transition: all 0.4s ease;
+            background: white;
+        }
+        
+        .gallery-item:hover { 
+            transform: translateY(-8px);
+            box-shadow: 0 12px 30px var(--shadow-dark);
+        }
+        
+        .gallery-item img { 
+            width: 100%; 
+            height: 180px; 
+            object-fit: cover; 
+            transition: transform 0.5s ease;
+        }
+        
+        .gallery-item:hover img { transform: scale(1.1); }
+        
+        .gallery-item span { 
+            position: absolute; 
+            bottom: 0; 
+            left: 0; 
+            right: 0; 
+            background: linear-gradient(transparent, rgba(92, 61, 46, 0.9));
+            color: white; 
+            padding: 40px 12px 12px; 
+            text-align: center; 
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+        
+        /* Products */
+        .product-grid { 
+            display: grid; 
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); 
+            gap: 2rem; 
+        }
+        
+        .product-card { 
+            background: white; 
+            padding: 1.8rem; 
+            border-radius: 20px; 
+            transition: all 0.4s ease; 
+            box-shadow: 0 4px 15px var(--shadow);
+            position: relative;
+            overflow: hidden;
+        }
+        
+        .product-card::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: linear-gradient(90deg, var(--primary), var(--gold));
+            opacity: 0;
+            transition: opacity 0.3s ease;
+        }
+        
+        .product-card:hover { 
+            transform: translateY(-8px); 
+            box-shadow: 0 15px 40px var(--shadow-dark);
+        }
+        
+        .product-card:hover::before { opacity: 1; }
+        
+        .product-image { 
+            width: 100%; 
+            height: 180px; 
+            background: var(--cream); 
+            border-radius: 14px; 
+            margin-bottom: 1rem; 
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+        
+        .product-image img { 
+            width: 100%; 
+            height: 100%; 
+            object-fit: cover; 
+            transition: transform 0.5s ease;
+        }
+        
+        .product-card:hover .product-image img { transform: scale(1.08) rotate(2deg); }
+        
+        .product-card h3 {
+            font-size: 1.25rem;
+            margin-bottom: 0.5rem;
+            color: var(--brown);
+        }
+        
+        .price { 
+            font-size: 1.6rem; 
+            color: var(--primary); 
+            font-weight: 800; 
+            margin: 0.5rem 0;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .stock { color: var(--secondary); font-weight: 600; font-size: 0.85rem; margin: 0.3rem 0; }
+        
+        .bulk-discount { 
+            background: linear-gradient(135deg, #FFF3E0, #FFE0B2); 
+            color: var(--primary-dark); 
+            padding: 6px 14px; 
+            border-radius: 8px; 
+            font-size: 0.82rem; 
+            margin: 0.6rem 0; 
+            font-weight: 600;
+            display: inline-block;
+        }
+        
+        .rating { color: var(--gold); font-size: 0.9rem; margin: 0.4rem 0; }
+        
+        .qty-input { 
+            width: 70px; 
+            margin: 0.5rem 0.3rem; 
+            padding: 8px 10px; 
+            text-align: center; 
+            border: 2px solid var(--accent); 
+            border-radius: 10px; 
+            font-weight: 600; 
+            background: var(--cream); 
+            color: var(--brown);
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+        }
+        
+        .qty-input:focus { 
+            border-color: var(--primary); 
+            box-shadow: 0 0 0 3px rgba(196, 90, 44, 0.15); 
+            outline: none; 
+        }
+        
+        .item-total { 
+            font-weight: 700; 
+            color: var(--primary); 
+            margin: 0.6rem 0; 
+            font-size: 1.05rem;
+        }
+        
+        .add-to-cart { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
+            color: white; 
+            padding: 12px 24px; 
+            border: none; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            transition: all 0.3s ease; 
+            font-weight: 600;
+            font-size: 0.92rem;
+            width: 100%;
+        }
+        
+        .add-to-cart:hover { 
+            transform: scale(1.03); 
+            box-shadow: 0 6px 20px rgba(196, 90, 44, 0.3); 
+        }
+        
+        /* About Section */
+        .about-content {
+            background: white;
+            padding: 3rem;
+            border-radius: 20px;
+            box-shadow: 0 8px 30px var(--shadow);
+            max-width: 800px;
+            margin: 0 auto;
+        }
+        
+        .about-content ul {
+            list-style: none;
+            padding: 0;
+            margin: 1.5rem 0;
+        }
+        
+        .about-content li {
+            padding: 0.6rem 0;
+            padding-left: 1.8rem;
+            position: relative;
+            border-bottom: 1px solid rgba(212, 165, 116, 0.2);
+        }
+        
+        .about-content li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: var(--primary);
+            font-weight: bold;
+        }
+        
+        .features { 
+            display: flex; 
+            justify-content: center; 
+            gap: 1.5rem; 
+            margin-top: 2.5rem; 
+            flex-wrap: wrap;
+        }
+        
+        .feature { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
+            color: white; 
+            padding: 1rem 2rem; 
+            border-radius: 50px; 
+            transition: all 0.3s ease; 
+            font-weight: 600;
+            font-size: 0.92rem;
+        }
+        
+        .feature:hover { 
+            transform: translateY(-3px);
+            box-shadow: 0 8px 25px rgba(196, 90, 44, 0.4);
+        }
+        
+        /* Contact Section */
+        #contact { background: var(--cream); }
+        
+        #price-calculator { 
+            background: white; 
+            padding: 2rem; 
+            border-radius: 16px; 
+            margin-bottom: 2rem;
+            max-width: 500px;
+            margin-left: auto;
+            margin-right: auto;
+            box-shadow: 0 4px 15px var(--shadow);
+        }
+        
+        #price-calculator h3 {
+            text-align: center;
+            margin-bottom: 1.5rem;
+            color: var(--brown);
+        }
+        
+        #price-calculator select,
+        #price-calculator input {
+            width: 100%;
+            padding: 12px 16px;
+            border: 2px solid var(--accent);
+            border-radius: 12px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            background: var(--cream);
+            color: var(--brown);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        #calc-result { 
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            color: var(--primary); 
+            text-align: center;
+            margin-top: 1rem;
+            font-family: 'Playfair Display', serif;
+        }
+        
+        form { 
+            max-width: 500px; 
+            margin: 0 auto; 
+            display: flex; 
+            flex-direction: column; 
+            gap: 1rem; 
+        }
+        
+        form input, form select { 
+            padding: 14px 18px; 
+            border: 2px solid var(--accent); 
+            border-radius: 12px; 
+            font-size: 1rem; 
+            transition: all 0.3s ease; 
+            background: white; 
+            color: var(--brown);
+            font-family: 'Inter', sans-serif;
+        }
+        
+        form input:focus, form select:focus { 
+            border-color: var(--primary); 
+            box-shadow: 0 0 0 4px rgba(196, 90, 44, 0.1); 
+            outline: none; 
+        }
+        
+        form button[type="submit"] { 
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
+            color: white; 
+            border: none; 
+            cursor: pointer; 
+            padding: 16px; 
+            border-radius: 50px; 
+            font-weight: 700; 
+            transition: all 0.3s ease;
+            font-size: 1.05rem;
+        }
+        
+        form button[type="submit"]:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(196, 90, 44, 0.4);
+        }
+        
+        /* WhatsApp Button */
+        #whatsapp-btn { 
+            position: fixed; 
+            bottom: 24px; 
+            right: 24px; 
+            background: linear-gradient(135deg, #25D366, #128C7E); 
+            color: white; 
+            padding: 14px 20px; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            z-index: 1000; 
+            box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4); 
+            animation: pulse 2s infinite; 
+            font-weight: 600; 
+            font-size: 0.95rem;
+            transition: all 0.3s ease;
+            border: 3px solid white;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+        
+        #whatsapp-btn:hover { 
+            transform: scale(1.08); 
+            box-shadow: 0 10px 35px rgba(37, 211, 102, 0.5);
+        }
+        
+        @keyframes pulse {
+            0%, 100% { box-shadow: 0 6px 25px rgba(37, 211, 102, 0.4); }
+            50% { box-shadow: 0 6px 35px rgba(37, 211, 102, 0.6); }
+        }
+        
+        /* Modal */
+        .modal { 
+            display: none; 
+            position: fixed; 
+            z-index: 1001; 
+            left: 0; 
+            top: 0; 
+            width: 100%; 
+            height: 100%; 
+            background: rgba(92, 61, 46, 0.6); 
+            backdrop-filter: blur(5px);
+            animation: fadeIn 0.3s ease;
+        }
+        
+        .modal-content { 
+            background: white; 
+            margin: 10% auto; 
+            padding: 2.5rem; 
+            border-radius: 20px; 
+            width: 90%; 
+            max-width: 500px;
+            box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+        }
+        
+        .close { 
+            float: right; 
+            font-size: 2rem; 
+            cursor: pointer; 
+            color: var(--light-brown);
+            line-height: 1;
+            transition: all 0.3s ease;
+        }
+        
+        .close:hover { 
+            color: var(--primary);
+            transform: rotate(90deg);
+        }
+        
+        #cart-items { max-height: 300px; overflow-y: auto; margin: 1.5rem 0; }
+        
+        .cart-item { 
+            display: flex; 
+            justify-content: space-between; 
+            align-items: center; 
+            padding: 12px 0; 
+            border-bottom: 1px solid var(--cream);
+        }
+        
+        .cart-item button { 
+            background: #E57373; 
+            color: white; 
+            border: none; 
+            padding: 6px 14px; 
+            border-radius: 20px; 
+            cursor: pointer; 
+            transition: all 0.2s ease;
+            font-size: 0.8rem;
+        }
+        
+        .cart-item button:hover { 
+            background: #D32F2F;
+            transform: scale(1.05);
+        }
+        
+        #cart-total { 
+            font-size: 1.5rem; 
+            font-weight: 800; 
+            text-align: center; 
+            margin: 1.5rem 0; 
+            color: var(--primary);
+            font-family: 'Playfair Display', serif;
+        }
+        
+        #checkout-btn { 
+            width: 100%; 
+            background: linear-gradient(135deg, var(--primary), var(--primary-dark)); 
+            color: white; 
+            padding: 15px; 
+            border: none; 
+            border-radius: 50px; 
+            cursor: pointer; 
+            font-size: 1.05rem; 
+            font-weight: 700; 
+            transition: all 0.3s ease;
+        }
+        
+        #checkout-btn:hover { 
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(196, 90, 44, 0.4);
+        }
+        
+        /* Animations */
         @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
-        @keyframes slideDown { from { transform: translateY(-50px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
+        @keyframes slideUp { from { transform: translateY(30px); opacity: 0; } to { transform: translateY(0); opacity: 1; } }
         
+        /* Responsive */
         @media (max-width: 768px) {
-            .hero-content h2 { font-size: 2rem; }
-            .features { flex-direction: column; align-items: center; }
-            .modal-content { margin: 5% auto; width: 95%; }
-            .product-card:hover { transform: translateY(-5px); }
             .hamburger { display: flex; }
-            nav ul { position: fixed; top: 70px; left: -100%; width: 100%; height: calc(100vh - 70px); background: #8B4513; flex-direction: column; justify-content: flex-start; align-items: center; padding-top: 2rem; transition: left 0.3s ease; }
+            nav ul { 
+                position: fixed; 
+                top: 60px; 
+                left: -100%; 
+                width: 100%; 
+                height: calc(100vh - 60px); 
+                background: var(--warm-white); 
+                flex-direction: column; 
+                justify-content: flex-start; 
+                align-items: center; 
+                padding-top: 3rem; 
+                transition: left 0.3s ease;
+                gap: 0;
+            }
             nav ul.active { left: 0; }
-            nav ul li { margin: 1rem 0; }
+            nav ul li { margin: 1.2rem 0; width: 100%; text-align: center; }
+            nav ul li a { display: block; padding: 10px; }
+            
+            .product-grid { grid-template-columns: 1fr; }
+            .gallery-grid { grid-template-columns: repeat(2, 1fr); }
+            .modal-content { margin: 5% auto; padding: 1.5rem; }
+            .features { flex-direction: column; align-items: center; }
+            
+            #whatsapp-btn { 
+                bottom: 16px; 
+                right: 16px; 
+                padding: 12px 16px;
+                font-size: 0.85rem;
+            }
         }
     </style>
 </head>
 <body>
     <nav>
         <div class="nav-container">
-            <h1>🍠 Synergy Food</h1>
+            <a href="#" class="logo">Synergy Foods</a>
             <div class="hamburger" onclick="toggleMenu()">
                 <span></span>
                 <span></span>
@@ -121,40 +741,59 @@
     </nav>
 
     <section id="hero">
+        <div class="hero-shapes">
+            <span></span>
+            <span></span>
+            <span></span>
+            <span></span>
+        </div>
         <div class="hero-content">
-            <h2 style="color: white; font-size: 48px">Synergy Food - Complete Food Supplies</h2>
-            <p>Bende Garri, Eggs, Potato Flour, Red Oil, Beans, Dried Cow Pomo, PAP & All Food Items to your doorstep</p>
-            <a href="#products" class="cta-button">Shop Now</a>
+            <span class="hero-badge">Premium Quality Foods</span>
+            <h1 class="hero-main-title">Synergy Foods</h1>
+            <p class="hero-tagline">Your Complete Food Supply Partner</p>
+            <p class="hero-description">Fresh Bende Garri, Eggs, Potato Flour, Red Oil, Beans, Dried Cow Pomo, PAP & all food items delivered right to your doorstep.</p>
+            <div class="hero-actions">
+                <a href="#products" class="hero-button primary">Explore Products</a>
+                <a href="#contact" class="hero-button secondary">Place Order</a>
+            </div>
         </div>
     </section>
 
     <section id="gallery">
         <div class="container">
-            <h2>Product Gallery</h2>
+            <div class="section-header">
+                <span class="section-label">Visual Tour</span>
+                <h2>Product Gallery</h2>
+                <p class="section-subtitle">A glimpse of our premium food offerings</p>
+            </div>
             <div class="gallery-grid">
-                <div class="gallery-item"><img src="food.jpg" alt= onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkdhcnJpIFdoaXRlPC90ZXh0Pjwvc3ZnPg=='"><span>Bende Garri White & Red</span></div>
-                <div class="gallery-item"><img src="oil.jpg" alt= onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkdhcnJpIFJlZDwvdGV4dD48L3N2Zz4='"><span>Palm Oil</span></div>
-                <div class="gallery-item"><img src="you.jpg" alt= onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkVnZ3MgQ3JhdGVzPC90ZXh0Pjwvc3ZnPg=='"><span></span></div>
-                <div class="gallery-item"><img src="me.jpg" alt=  onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlBvdGF0byBGbG91cjwvdGV4dD48L3N2Zz4='"><span>Eggs in Creates</span></div>
-                <div class="gallery-item"><img src="nice.jpg" alt=  onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlBvdGF0byBGbG91ciBMYXJnZTwvdGV4dD48L3N2Zz4='"><span>Chops</span></div>
-                <div class="gallery-item"><img src="pie.jpg" alt= onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlJlZCBPaWwgNUw8L3RleHQ+PC9zdmc+'"><span>Meat Pie</span></div>
-                <div class="gallery-item"><img src="cake.jpg" alt= onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlJlZCBPaWwgMjVMPC90ZXh0Pjwvc3ZnPg=='"><span>Cake</span></div>
-                <div class="gallery-item"><img src="meal.jpg" alt= onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkJlYW5zPC90ZXh0Pjwvc3ZnPg=='"><span>Ready Pap</span></div>
-                <div class="gallery-item"><img src="meat.jpg" alt=  onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkRyaWVkIENvdyBQb21vPC90ZXh0Pjwvc3ZnPg=='"><span>Snacks</span></div>
-                <div class="gallery-item"><img src="rolls.jpg" alt= onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlJlYWR5IFBBUDwvdGV4dD48L3N2Zz4='"><span>Dried Cow Pomo</span></div>
-                <div class="gallery-item"><img src="donourt.jpg" alt= onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjZjBmMGYwIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzk5OSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkFsbCBGb29kIEl0ZW1zPC90ZXh0Pjwvc3ZnPg=='"><span>All Food Items</span></div>
+                <div class="gallery-item"><img src="food.jpg" alt="Bende Garri" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRkRGNkVFIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzVDM0QyRSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkdhcnJpPC90ZXh0Pjwvc3ZnPg=='"><span>Bende Garri White & Red</span></div>
+                <div class="gallery-item"><img src="Palm-Oil.png" alt="Palm Oil" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRkRGNkVFIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzVDM0QyRSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlBhbG0gT2lsPC90ZXh0Pjwvc3ZnPg=='"><span>Palm Oil</span></div>
+                <div class="gallery-item"><img src="you.jpg" alt="Food Items" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRkRGNkVFIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzVDM0QyRSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkZvb2QgSXRlbXM8L3RleHQ+PC9zdmc+'"><span>Premium Quality</span></div>
+                <div class="gallery-item"><img src="me.jpg" alt="Eggs" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRkRGNkVFIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzVDM0QyRSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkVnZ3M8L3RleHQ+PC9zdmc+'"><span>Eggs in Crates</span></div>
+                <div class="gallery-item"><img src="nice.jpg" alt="Snacks" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRkRGNkVFIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzVDM0QyRSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlNuYWNrczwvdGV4dD48L3N2Zz4='"><span>Chops & Snacks</span></div>
+                <div class="gallery-item"><img src="pie.jpg" alt="Meat Pie" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRkRGNkVFIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzVDM0QyRSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPk1lYXQgUGllPC90ZXh0Pjwvc3ZnPg=='"><span>Meat Pie</span></div>
+                <div class="gallery-item"><img src="scarf.jpg" alt="Food" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRkRGNkVFIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzVDM0QyRSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlByZW1pdW08L3RleHQ+PC9zdmc+'"><span>Quality Foods</span></div>
+                <div class="gallery-item"><img src="cake.jpg" alt="Cake" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRkRGNkVFIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzVDM0QyRSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNha2U8L3RleHQ+PC9zdmc+'"><span>Cake</span></div>
+                <div class="gallery-item"><img src="meal.jpg" alt="Pap" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRkRGNkVFIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzVDM0QyRSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlBBUDwvdGV4dD48L3N2Zz4='"><span>Ready Pap</span></div>
+                <div class="gallery-item"><img src="meat.jpg" alt="Snacks" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRkRGNkVFIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzVDM0QyRSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPlNuYWNrczwvdGV4dD48L3N2Zz4='"><span>Snacks</span></div>
+                <div class="gallery-item"><img src="rolls.jpg" alt="Cow Pomo" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRkRGNkVFIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzVDM0QyRSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkNvdyBQb21vPC90ZXh0Pjwvc3ZnPg=='"><span>Dried Cow Pomo</span></div>
+                <div class="gallery-item"><img src="donourt.jpg" alt="All Foods" onerror="this.src='data:image/svg+xml;base64,PHN2ZyB3aWR0aD0iMjAwIiBoZWlnaHQ9IjIwMCIgeG1sbnM9Imh0dHA6Ly93d3cudzMub3JnLzIwMDAvc3ZnIj48cmVjdCB3aWR0aD0iMTAwJSIgaGVpZ2h0PSIxMDAlIiBmaWxsPSIjRkRGNkVFIi8+PHRleHQgeD0iNTAlIiB5PSI1MCUiIGZvbnQtZmFtaWx5PSJBcmlhbCIgZm9udC1zaXplPSIxNCIgZmlsbD0iIzVDM0QyRSIgdGV4dC1hbmNob3I9Im1pZGRsZSIgZHk9Ii4zZW0iPkFsbCBGb29kczwvdGV4dD48L3N2Zz4='"><span>All Food Items</span></div>
             </div>
         </div>
     </section>
 
     <section id="products">
         <div class="container">
-            <h2>Our Products</h2>
+            <div class="section-header">
+                <span class="section-label">Our Selection</span>
+                <h2>Featured Products</h2>
+                <p class="section-subtitle">Premium quality foods at competitive prices</p>
+            </div>
             <div class="product-grid">
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="love.jpg" alt="Potato Flour Big" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                        <span style="display:none; font-size:4rem;">🥔</span>
+                        <img src="love.jpg" alt="Potato Flour" onerror="this.style.display='none'">
                     </div>
                     <h3>Potato Flour</h3>
                     <div class="price">₦2,000/kg</div>
@@ -164,12 +803,11 @@
                     <div class="rating">⭐⭐⭐⭐⭐ (4.8/5)</div>
                     <input type="number" class="qty-input" min="1" value="1" data-product="Potato Flour Big" data-price="3000" onchange="updatePreview(this)">
                     <div class="item-total">Subtotal: ₦3,000</div>
-                    <button class="add-to-cart" onclick="addToCart('Potato Flour Big', 3000)">Add to Cart</button>
+                    <button class="add-to-cart" onclick="addToCart('Potato Flour Big', 3000, this)">Add to Cart</button>
                 </div>
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="food.jpg" alt="Potato Flour Small" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                        <span style="display:none; font-size:4rem;">🥔</span>
+                        <img src="garri.jpg" alt="White Garri" onerror="this.style.display='none'">
                     </div>
                     <h3>White Garri</h3>
                     <div class="price">₦800/kg</div>
@@ -179,93 +817,91 @@
                     <div class="rating">⭐⭐⭐⭐⭐ (4.9/5)</div>
                     <input type="number" class="qty-input" min="1" value="1" data-product="Potato Flour Small" data-price="1500" onchange="updatePreview(this)">
                     <div class="item-total">Subtotal: ₦1,500</div>
-                    <button class="add-to-cart" onclick="addToCart('Potato Flour Small', 1500)">Add to Cart</button>
+                    <button class="add-to-cart" onclick="addToCart('Potato Flour Small', 1500, this)">Add to Cart</button>
                 </div>
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="food.jpg" alt="Bende Garri" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                        <span style="display:none; font-size:4rem;">🌾</span>
+                        <img src="garri.jpg" alt="Red Garri" onerror="this.style.display='none'">
                     </div>
-                    <h3>Yellow Garri</h3>
-                    <div class="price">₦800/kg</div>
+                    <h3>Red Garri</h3>
+                    <div class="price">₦1,000/kg</div>
                     <div class="stock">✅ In Stock</div>
-                    <p>Premium Yellow Bende garri with rich flavor 
-                    2kg 1500</p>
+                    <p>Premium red Bende garri with rich flavor</p>
                     <div class="bulk-discount">💰 Bulk orders available</div>
+                    <div class="rating">⭐⭐⭐⭐⭐ (4.8/5)</div>
                     <input type="number" class="qty-input" min="1" value="1" data-product="Bende Garri" data-price="2000" onchange="updatePreview(this)">
-                    <button class="add-to-cart" onclick="addToCart('Bende Garri', 2000)">Add to Cart</button>
+                    <div class="item-total">Subtotal: ₦2,000</div>
+                    <button class="add-to-cart" onclick="addToCart('Bende Garri', 2000, this)">Add to Cart</button>
                 </div>
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="oil.jpg" alt="Eggs Wholesale" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                        <span style="display:none; font-size:4rem;">🥚</span>
+                        <img src="oil.jpg" alt="Red Oil" onerror="this.style.display='none'">
                     </div>
                     <h3>Red Oil</h3>
-                    <div class="price">₦14,000/4L</div>
+                    <div class="price">₦15,000/4L</div>
                     <div class="stock">✅ Available in 4L, 5L, 10L, 25L</div>
                     <p>Pure palm oil available in various sizes</p>
                     <div class="bulk-discount">💰 Larger sizes available</div>
+                    <div class="rating">⭐⭐⭐⭐⭐ (4.9/5)</div>
                     <input type="number" class="qty-input" min="1" value="1" data-product="Eggs Crates" data-price="3500" onchange="updatePreview(this)">
-                    <button class="add-to-cart" onclick="addToCart('Eggs Crates', 3500)">Add to Cart</button>
+                    <div class="item-total">Subtotal: ₦3,500</div>
+                    <button class="add-to-cart" onclick="addToCart('Eggs Crates', 3500, this)">Add to Cart</button>
                 </div>
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="beans.jpg" alt="Direct Red Oil" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                        <span style="display:none; font-size:4rem;">🛢️</span>
+                        <img src="raw.jpg" alt="Beans" onerror="this.style.display='none'">
                     </div>
-                    <h3>Honey Beans</h3>
-                    <div class="price">₦1,300/kg</div>
+                    <h3>Big White Beans</h3>
+                    <div class="price">₦1,800/kg</div>
                     <div class="stock">✅ In Stock</div>
                     <p>Quality big white beans, perfect for cooking</p>
-                    <p>White Big and clean 1000 per measure</p>
                     <div class="bulk-discount">💰 Bulk pricing available</div>
                     <div class="rating">⭐⭐⭐⭐⭐ (4.8/5)</div>
                     <input type="number" class="qty-input" min="1" value="1" data-product="Red Oil 5L" data-price="8000" onchange="updatePreview(this)">
-                    <button class="add-to-cart" onclick="addToCart('Red Oil 5L', 8000)">Add to Cart</button>
+                    <div class="item-total">Subtotal: ₦8,000</div>
+                    <button class="add-to-cart" onclick="addToCart('Red Oil 5L', 8000, this)">Add to Cart</button>
                 </div>
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="dried.jpg" alt="Beans" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                        <span style="display:none; font-size:4rem;">🫘</span>
+                        <img src="rolls.jpg" alt="Cow Pomo" onerror="this.style.display='none'">
                     </div>
                     <h3>Dried Cow Pomo</h3>
-                    <div class="price">₦3,000/500g</div>
+                    <div class="price">₦2,000/300g</div>
                     <div class="stock">✅ In Stock</div>
-                    <p>Premium dried cow skin (pomo) for traditional dishes  </p>
-                    <p>Pomo that triple after soaking after 24hours</p>
+                    <p>Premium dried cow skin (pomo) for traditional dishes</p>
                     <div class="bulk-discount">💰 Available in various quantities</div>
                     <div class="rating">⭐⭐⭐⭐⭐ (4.7/5)</div>
                     <input type="number" class="qty-input" min="1" value="1" data-product="Beans" data-price="1800" onchange="updatePreview(this)">
-                    <button class="add-to-cart" onclick="addToCart('Beans', 1800)">Add to Cart</button>
+                    <div class="item-total">Subtotal: ₦1,800</div>
+                    <button class="add-to-cart" onclick="addToCart('Beans', 1800, this)">Add to Cart</button>
                 </div>
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="meal.jpg" alt="Dried Cow Pomo" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                        <span style="display:none; font-size:4rem;">🥩</span>
+                        <img src="meal.jpg" alt="PAP" onerror="this.style.display='none'">
                     </div>
                     <h3>PAP</h3>
-                    <div class="price">₦3,000/2.5kg</div>
+                    <div class="price">₦1,000/kg</div>
                     <div class="stock">✅ Made on Request</div>
                     <p>Fresh PAP flour prepared on request</p>
                     <div class="bulk-discount">💰 Custom orders welcome</div>
                     <div class="rating">⭐⭐⭐⭐⭐ (4.6/5)</div>
                     <input type="number" class="qty-input" min="1" value="1" data-product="Dried Cow Pomo" data-price="2500" onchange="updatePreview(this)">
                     <div class="item-total">Subtotal: ₦2,500</div>
-                    <button class="add-to-cart" onclick="addToCart('Dried Cow Pomo', 2500)">Add to Cart</button>
+                    <button class="add-to-cart" onclick="addToCart('Dried Cow Pomo', 2500, this)">Add to Cart</button>
                 </div>
                 <div class="product-card">
                     <div class="product-image">
-                        <img src="me.jpg" alt="Ready PAP" onerror="this.style.display='none'; this.nextElementSibling.style.display='block'">
-                        <span style="display:none; font-size:4rem;">🥣</span>
+                        <img src="me.jpg" alt="Eggs" onerror="this.style.display='none'">
                     </div>
                     <h3>Eggs (Wholesale Crates)</h3>
-                    <div class="price">₦5,500/crate</div>
+                    <div class="price">₦3,500/crate</div>
                     <div class="stock">✅ In Stock (Wholesale Only)</div>
                     <p>Fresh eggs supplied in crates for wholesale customers</p>
-                    <div class="bulk-discount">💰 Wholesale pricing available Big 6,000 , Medium 5,500</div>
+                    <div class="bulk-discount">💰 Wholesale pricing available</div>
                     <div class="rating">⭐⭐⭐⭐⭐ (4.9/5)</div>
                     <input type="number" class="qty-input" min="1" value="1" data-product="Ready PAP" data-price="1200" onchange="updatePreview(this)">
-                    <button class="add-to-cart" onclick="addToCart('Ready PAP', 1200)">Add to Cart</button>
+                    <div class="item-total">Subtotal: ₦1,200</div>
+                    <button class="add-to-cart" onclick="addToCart('Ready PAP', 1200, this)">Add to Cart</button>
                 </div>
             </div>
         </div>
@@ -273,66 +909,76 @@
 
     <section id="about">
         <div class="container">
-            <h2>About Synergy Food</h2>
-            <p><strong>WE ARE INTO:</strong></p>
-            <ul style="text-align: left; max-width: 600px; margin: 0 auto;">
-                <li>Bende Garri white and red supplies in small and large quantity</li>
-                <li>Eggs supplies in crates – wholesale</li>
-                <li>Potato Flour in small and large quantity</li>
-                <li>Direct Red Oil in 5Ltrs, 10Ltrs, 25Ltrs and more</li>
-                <li>Beans – Small and Large quantity</li>
-                <li>Dried Cow Pomo</li>
-                <li>Ready to make PAP on request</li>
-                <li>We deal with all food items to your doorstep</li>
-            </ul>
-            <p><strong>Order through:</strong> 08027098029 / 08110839405</p>
-            <p><strong>Synergy Food is near to you. You are free to reach out to us anytime any day. Thanks.</strong></p>
-            <div class="features">
-                <div class="feature">✅ Fresh Daily</div>
-                <div class="feature">🚚 Free Delivery</div>
-                <div class="feature">💯 Quality Guaranteed</div>
+            <div class="section-header">
+                <span class="section-label">Who We Are</span>
+                <h2>About Synergy Foods</h2>
+            </div>
+            <div class="about-content">
+                <p><strong>WE ARE INTO:</strong></p>
+                <ul>
+                    <li>Bende Garri white and red supplies in small and large quantity</li>
+                    <li>Eggs supplies in crates – wholesale</li>
+                    <li>Potato Flour in small and large quantity</li>
+                    <li>Direct Red Oil in 5Ltrs, 10Ltrs, 25Ltrs and more</li>
+                    <li>Beans – Small and Large quantity</li>
+                    <li>Dried Cow Pomo</li>
+                    <li>Ready to make PAP on request</li>
+                    <li>We deal with all food items to your doorstep</li>
+                </ul>
+                <p><strong>Order through:</strong> 08027098029 / 08110839405</p>
+                <p style="margin-top: 1rem; color: var(--primary); font-weight: 600;">Synergy Food is near to you. You are free to reach out to us anytime any day. Thanks.</p>
+                <div class="features">
+                    <div class="feature">✅ Fresh Daily</div>
+                    <div class="feature">🚚 Free Delivery</div>
+                    <div class="feature">💯 Quality Guaranteed</div>
+                </div>
             </div>
         </div>
     </section>
 
-    <div id="whatsapp-btn" onclick="openWhatsApp()">📱 WhatsApp Order</div>
+    <div id="whatsapp-btn" onclick="openWhatsApp()">
+        <span>📱</span> WhatsApp Order
+    </div>
 
     <div id="cart-modal" class="modal">
         <div class="modal-content">
             <span class="close" onclick="toggleCart()">&times;</span>
-            <h2>Shopping Cart</h2>
+            <h2 style="text-align: center; margin-bottom: 1.5rem;">Shopping Cart</h2>
             <div id="cart-items"></div>
             <div id="cart-total">Total: ₦0.00</div>
-            <button id="checkout-btn" onclick="checkout()">Checkout</button>
+            <button id="checkout-btn" onclick="checkout()">Proceed to Checkout</button>
         </div>
     </div>
 
     <section id="contact">
         <div class="container">
-            <h2>Checkout</h2>
+            <div class="section-header">
+                <span class="section-label">Get Started</span>
+                <h2>Checkout</h2>
+                <p class="section-subtitle">Complete your order with ease</p>
+            </div>
             <div id="price-calculator">
                 <h3>Price Calculator</h3>
                 <select id="calc-product">
-                    <option value="800">White Garri - ₦1,400/2kg</option>
-                    <option value="1000">Yellow Bende Garri - ₦1,500/2kg</option>
+                    <option value="800">White Garri - ₦800/kg</option>
+                    <option value="1000">Red Garri - ₦1,000/kg</option>
                     <option value="2000">Potato Flour - ₦2,000/kg</option>
-                    <option value="15000">Red Oil (4L) - ₦14,000/4L</option>
-                    <option value="2000">Dried Cow Pomo - ₦3,000/500g</option>
+                    <option value="15000">Red Oil (4L) - ₦15,000/4L</option>
+                    <option value="2000">Dried Cow Pomo - ₦2,000/300g</option>
                     <option value="1800">Big White Beans - ₦1,800/kg</option>
                     <option value="1000">PAP - ₦1,000/kg</option>
-                    <option value="3500">Eggs (Crates) - ₦5,800/crate</option>
+                    <option value="3500">Eggs (Crates) - ₦3,500/crate</option>
                 </select>
                 <input type="number" id="calc-qty" placeholder="Quantity (kg)" min="1" value="1">
                 <div id="calc-result">Total: ₦3,000</div>
             </div>
             <form id="order-form">
-                <input type="text" placeholder="Your Name" required>
+                <input type="text" placeholder="Your Full Name" required>
                 <input type="tel" placeholder="Phone Number" required>
                 <input type="email" placeholder="Email (optional for confirmation)">
-                <input type="text" placeholder="Address" required>
-
+                <input type="text" placeholder="Delivery Address" required>
                 <select id="payment-method" required>
-                    <option value="">Payment Method</option>
+                    <option value="">Select Payment Method</option>
                     <option value="Cash on Delivery">Cash on Delivery</option>
                     <option value="Card Payment">Card Payment</option>
                     <option value="Bank Transfer">Bank Transfer</option>
@@ -348,7 +994,7 @@
         let cartTotal = 0;
 
         // Initialize EmailJS
-        emailjs.init('YOUR_PUBLIC_KEY'); // Replace with your EmailJS public key
+        emailjs.init('YOUR_PUBLIC_KEY');
 
         // Smooth scrolling
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
@@ -369,7 +1015,6 @@
             
             let total;
             if (product === 'Potato Flour Big') {
-                // Count in twos: 2kg = ₦3,000, 4kg = ₦6,000, etc.
                 total = Math.ceil(quantity / 2) * 3000;
             } else {
                 const finalPrice = quantity >= 5 ? (price - 300) : price;
@@ -381,24 +1026,22 @@
             totalElement.textContent = `Subtotal: ₦${total.toLocaleString()}`;
             
             if (product === 'Potato Flour Big') {
-                totalElement.style.color = '#28a745';
-                totalElement.innerHTML += ' <small>(2kg minimum pricing)</small>';
+                totalElement.style.color = 'var(--primary)';
             } else if (quantity >= 5) {
-                totalElement.style.color = '#28a745';
-                totalElement.innerHTML += ' <small>(Bulk discount applied!)</small>';
+                totalElement.style.color = 'var(--secondary)';
+                totalElement.innerHTML += ' <small style="font-size:0.8rem;color:#666;">(Bulk discount!)</small>';
             } else {
-                totalElement.style.color = '#8B4513';
+                totalElement.style.color = 'var(--primary)';
             }
         }
 
         // Shopping cart functions
-        function addToCart(product, price) {
+        function addToCart(product, price, button) {
             const qtyInput = document.querySelector(`input[data-product="${product}"]`);
             const quantity = parseInt(qtyInput.value);
             
             let itemTotal;
             if (product === 'Potato Flour Big') {
-                // Count in twos: 2kg = ₦3,000, 4kg = ₦6,000, etc.
                 itemTotal = Math.ceil(quantity / 2) * 3000;
             } else {
                 const finalPrice = quantity >= 5 ? (price - 300) : price;
@@ -418,13 +1061,16 @@
                 cart.push({ product, price, quantity, total: itemTotal });
             }
             
-            const button = event.target;
-            button.textContent = 'Added! ✓';
-            button.style.background = '#28a745';
-            setTimeout(() => {
-                button.textContent = 'Add to Cart';
-                button.style.background = '#28a745';
-            }, 1000);
+            if (button) {
+                const originalText = button.textContent;
+                button.textContent = 'Added! ✓';
+                button.style.background = 'linear-gradient(135deg, #2D5A3D, #1B3A25)';
+                
+                setTimeout(() => {
+                    button.textContent = originalText;
+                    button.style.background = 'linear-gradient(135deg, var(--primary), var(--primary-dark))';
+                }, 1000);
+            }
             
             updateCartDisplay();
             qtyInput.value = 1;
@@ -438,18 +1084,19 @@
             
             const cartCountEl = document.getElementById('cart-count');
             cartCountEl.style.transform = 'scale(1.5)';
-            cartCountEl.style.color = '#ff4444';
+            cartCountEl.style.color = '#D32F2F';
+            
             setTimeout(() => {
                 cartCountEl.style.transform = 'scale(1)';
-                cartCountEl.style.color = 'white';
+                cartCountEl.style.color = 'var(--primary)';
             }, 300);
             
             const cartItems = document.getElementById('cart-items');
             cartItems.innerHTML = cart.map(item => `
                 <div class="cart-item">
-                    <span>${item.product} x${item.quantity}kg</span>
-                    <span>₦${item.total.toLocaleString()}</span>
-                    <button onclick="removeFromCart('${item.product}')" style="background: #dc3545; color: white; border: none; padding: 5px 10px; border-radius: 3px;">Remove</button>
+                    <span style="font-weight:600;">${item.product} x${item.quantity}</span>
+                    <span style="font-weight:700;color:var(--primary);">₦${item.total.toLocaleString()}</span>
+                    <button onclick="removeFromCart('${item.product}')">Remove</button>
                 </div>
             `).join('');
             
@@ -472,26 +1119,19 @@
                 return;
             }
             toggleCart();
-            document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+            setTimeout(() => {
+                document.querySelector('#contact').scrollIntoView({ behavior: 'smooth' });
+            }, 300);
         }
 
         // WhatsApp integration
         function openWhatsApp() {
             const message = cart.length > 0 
-                ? `Hi Synergy Food! I want to order:\n${cart.map(item => `${item.product} x${item.quantity} - ₦${item.total.toLocaleString()}`).join('\n')}\n\nTotal: ₦${cartTotal.toLocaleString()}\n\nPlease confirm availability and delivery time.`
-                : 'Hi Synergy Food! I want to place an order. Please send me your current prices and availability.';
+                ? `Hi Synergy Food! I want to order:\n${cart.map(item => `${item.product} x${item.quantity} - ₦${item.total.toLocaleString()}`).join('\n')}\n\nTotal: ₦${cartTotal.toLocaleString()}\n\nPlease confirm availability.`
+                : 'Hi Synergy Food! I want to place an order. Please send me your current prices.';
             
-            // Primary number
             const whatsappUrl = `https://wa.me/2348110839405?text=${encodeURIComponent(message)}`;
             window.open(whatsappUrl, '_blank');
-            
-            // Also show alternative number option
-            setTimeout(() => {
-                if (confirm('You can also contact us on 08027098029. Click OK to open second WhatsApp number.')) {
-                    const altWhatsappUrl = `https://wa.me/2348027098029?text=${encodeURIComponent(message)}`;
-                    window.open(altWhatsappUrl, '_blank');
-                }
-            }, 2000);
         }
 
         // Price calculator
@@ -503,31 +1143,14 @@
             const qty = parseInt(document.getElementById('calc-qty').value) || 1;
             
             let total;
-            let priceInfo = '';
-            
-            if (price === 3000) { // Potato Flour Big
-                // Count in twos: 2kg = ₦3,000, 4kg = ₦6,000, etc.
+            if (price === 3000) {
                 total = Math.ceil(qty / 2) * 3000;
-                priceInfo = '<div style="color: #28a745; font-weight: bold;">📦 2kg minimum pricing applied</div>';
             } else {
                 const finalPrice = qty >= 5 ? (price - 300) : price;
                 total = qty * finalPrice;
-                if (qty >= 5) {
-                    priceInfo = '<div style="color: #28a745; font-weight: bold;">🎉 Bulk discount applied! You saved ₦' + (300 * qty).toLocaleString() + '</div>';
-                }
             }
             
-            document.getElementById('calc-result').innerHTML = `
-                <div style="font-size: 1.5rem; color: #8B4513;">Total: ₦${total.toLocaleString()}</div>
-                ${priceInfo}
-                <div style="font-size: 0.9rem; color: #666; margin-top: 10px;">Quantity: ${qty}kg</div>
-            `;
-            
-            const resultEl = document.getElementById('calc-result');
-            resultEl.style.transform = 'scale(1.05)';
-            setTimeout(() => {
-                resultEl.style.transform = 'scale(1)';
-            }, 200);
+            document.getElementById('calc-result').textContent = `Total: ₦${total.toLocaleString()}`;
         }
 
         // Order form handling
@@ -539,17 +1162,15 @@
             
             submitBtn.textContent = 'Processing...';
             submitBtn.disabled = true;
-            statusDiv.innerHTML = '<div style="color: #666;">📤 Submitting your order...</div>';
             
-            const name = this.querySelector('input[placeholder="Your Name"]').value;
+            const name = this.querySelector('input[placeholder="Your Full Name"]').value;
             const phone = this.querySelector('input[placeholder="Phone Number"]').value;
             const email = this.querySelector('input[placeholder="Email (optional for confirmation)"]').value;
-            const address = this.querySelector('input[placeholder="Address"]').value;
-            const delivery = 'Standard Delivery';
+            const address = this.querySelector('input[placeholder="Delivery Address"]').value;
             const payment = document.getElementById('payment-method').value;
             
             if (cart.length === 0) {
-                statusDiv.innerHTML = '<div style="color: #dc3545;">❌ Please add items to cart first!</div>';
+                statusDiv.innerHTML = '<div style="color: #D32F2F; text-align:center;">❌ Please add items to cart first!</div>';
                 submitBtn.textContent = 'Place Order';
                 submitBtn.disabled = false;
                 return;
@@ -557,9 +1178,8 @@
             
             try {
                 const orderNumber = 'SYN' + Date.now().toString().slice(-6);
-                const itemsList = cart.map(item => `${item.product} x${item.quantity}kg - ₦${item.total.toLocaleString()}`).join('\n');
+                const itemsList = cart.map(item => `${item.product} x${item.quantity} - ₦${item.total.toLocaleString()}`).join('\n');
                 
-                // Send email using EmailJS
                 const emailData = {
                     to_email: 'beautyiserhienrhien@gmail.com',
                     order_number: orderNumber,
@@ -567,7 +1187,6 @@
                     customer_phone: phone,
                     customer_email: email || 'Not provided',
                     customer_address: address,
-                    delivery_option: 'Standard Delivery',
                     payment_method: payment,
                     order_items: itemsList,
                     order_total: `₦${cartTotal.toLocaleString()}`,
@@ -577,29 +1196,26 @@
                 await emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', emailData);
             
                 statusDiv.innerHTML = `
-                    <div style="color: #28a745; padding: 15px; background: #d4edda; border-radius: 5px;">
+                    <div style="color: #2D5A3D; padding: 15px; background: #E8F5E9; border-radius: 12px; border-left: 4px solid #2D5A3D;">
                         🎉 <strong>Order Confirmed!</strong><br>
                         Order #: ${orderNumber}<br>
-                        📧 Email sent to beautyiserhienrhien@gmail.com<br>
                         📞 We'll call you within 30 minutes
                     </div>
                 `;
                 
             } catch (error) {
-                // Fallback to mailto if EmailJS fails
                 const orderNumber = 'SYN' + Date.now().toString().slice(-6);
-                const itemsList = cart.map(item => `${item.product} x${item.quantity}kg - ₦${item.total.toLocaleString()}`).join('\n');
+                const itemsList = cart.map(item => `${item.product} x${item.quantity} - ₦${item.total.toLocaleString()}`).join('\n');
                 
-                const subject = `🍠 New Order #${orderNumber} - Synergy Food`;
-                const body = `Dear Synergy Food Team,\n\nYou have received a new order!\n\n📋 ORDER DETAILS:\nOrder Number: ${orderNumber}\nDate: ${new Date().toLocaleString()}\n\n👤 CUSTOMER INFO:\nName: ${name}\nPhone: ${phone}\nEmail: ${email || 'Not provided'}\nAddress: ${address}\n\n🛒 ORDER ITEMS:\n${itemsList}\n\n💰 TOTAL: ₦${cartTotal.toLocaleString()}\n\n🚚 DELIVERY: ${delivery}\n💳 PAYMENT: ${payment}\n\nPlease contact the customer within 30 minutes to confirm delivery.\n\nBest regards,\nSynergy Food Website`;
+                const subject = `New Order #${orderNumber} - Synergy Food`;
+                const body = `Order: ${orderNumber}\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email}\nAddress: ${address}\nPayment: ${payment}\n\nItems:\n${itemsList}\n\nTotal: ₦${cartTotal.toLocaleString()}`;
                 
                 const mailtoLink = `mailto:beautyiserhienrhien@gmail.com?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
                 window.open(mailtoLink, '_blank');
                 
                 statusDiv.innerHTML = `
-                    <div style="color: #ffc107; padding: 15px; background: #fff3cd; border-radius: 5px;">
-                        ⚠️ <strong>Email client opened</strong><br>
-                        Please send the email to complete your order
+                    <div style="color: #F57C00; padding: 15px; background: #FFF3E0; border-radius: 12px;">
+                        ⚠️ Email client opened - please send to complete order
                     </div>
                 `;
             }
@@ -607,23 +1223,12 @@
             cart = [];
             updateCartDisplay();
             this.reset();
-                
-            
-            // Also open WhatsApp as backup
-            setTimeout(() => {
-                const itemsList = cart.map(item => `${item.product} x${item.quantity}kg - ₦${item.total.toLocaleString()}`).join('\n');
-                const whatsappMessage = `🍠 NEW ORDER - Synergy Food\n\nOrder #: SYN${Date.now().toString().slice(-6)}\nCustomer: ${name}\nPhone: ${phone}\nEmail: ${email || 'Not provided'}\nAddress: ${address}\nDelivery: ${delivery}\nPayment: ${payment}\n\nITEMS:\n${itemsList}\n\nTOTAL: ₦${cartTotal.toLocaleString()}`;
-                
-                const whatsappUrl = `https://wa.me/2348110839405?text=${encodeURIComponent(whatsappMessage)}`;
-                window.open(whatsappUrl, '_blank');
-                
-            }, 2000);
             
             submitBtn.textContent = 'Place Order';
             submitBtn.disabled = false;
         });
 
-        // Hamburger menu functions
+        // Hamburger menu
         function toggleMenu() {
             const hamburger = document.querySelector('.hamburger');
             const navMenu = document.getElementById('nav-menu');
@@ -644,18 +1249,34 @@
         window.addEventListener('load', () => {
             document.querySelectorAll('.product-card').forEach((card, index) => {
                 card.style.opacity = '0';
-                card.style.transform = 'translateY(50px)';
+                card.style.transform = 'translateY(30px)';
                 setTimeout(() => {
                     card.style.transition = 'all 0.6s ease';
                     card.style.opacity = '1';
                     card.style.transform = 'translateY(0)';
-                }, index * 200);
+                }, index * 100);
+            });
+            
+            document.querySelectorAll('.gallery-item').forEach((item, index) => {
+                item.style.opacity = '0';
+                setTimeout(() => {
+                    item.style.transition = 'all 0.5s ease';
+                    item.style.opacity = '1';
+                }, index * 80);
             });
         });
 
         document.querySelectorAll('.qty-input').forEach(input => {
+            input.addEventListener('change', function() { updatePreview(this); });
             updatePreview(input);
         });
+
+        window.onclick = function(event) {
+            const modal = document.getElementById('cart-modal');
+            if (event.target == modal) {
+                modal.style.display = 'none';
+            }
+        }
     </script>
 </body>
 </html>
